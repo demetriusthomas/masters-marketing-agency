@@ -22,6 +22,7 @@ export default function Header() {
     { href: '#how-it-works', label: 'How It Works' },
     { href: '#testimonials', label: 'Testimonials' },
     { href: '#faq', label: 'FAQ' },
+    { href: '/blog', label: 'Blog' },
   ]
 
   return (
@@ -46,17 +47,29 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-[#FF9700] ${
-                  isScrolled ? 'text-gray-700' : 'text-white/90'
-                }`}
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.href.startsWith('#') ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm font-medium transition-colors hover:text-[#FF9700] ${
+                    isScrolled ? 'text-gray-700' : 'text-white/90'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm font-medium transition-colors hover:text-[#FF9700] ${
+                    isScrolled ? 'text-gray-700' : 'text-white/90'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </nav>
 
           {/* CTA Button */}
@@ -100,16 +113,27 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white border-t">
           <nav className="px-4 py-4 space-y-3">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="block py-2 text-gray-700 hover:text-[#FF9700] font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.href.startsWith('#') ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="block py-2 text-gray-700 hover:text-[#FF9700] font-medium"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="block py-2 text-gray-700 hover:text-[#FF9700] font-medium"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
             <a
               href="#contact"
               className="block w-full text-center py-3 bg-[#FF9700] text-white font-semibold rounded-full hover:bg-[#E68600] transition-colors"
