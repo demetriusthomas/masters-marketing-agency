@@ -13,9 +13,9 @@ const caseStudies = [
   },
   {
     industry: 'E-commerce',
-    metric: '$2.4M',
-    description: 'Revenue generated',
-    detail: 'Online retailer saw 4x ROAS through our comprehensive digital marketing strategy.',
+    metric: '$15.4M',
+    description: '26x ROAS',
+    detail: 'Online retailer achieved exceptional returns through our comprehensive digital marketing strategy.',
   },
   {
     industry: 'Real Estate',

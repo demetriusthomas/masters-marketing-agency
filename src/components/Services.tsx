@@ -39,6 +39,17 @@ const services = [
     description: 'Reach customers instantly with text message marketing. 98% open rate means your message gets seen.',
     features: ['Missed Call Text Back', 'Appointment Reminders', 'Promotional Campaigns', 'Two-Way Messaging'],
   },
+  {
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v1m0 2v1m-2-2h4" />
+      </svg>
+    ),
+    title: 'AI Automation',
+    description: 'Supercharge your business with cutting-edge AI. We build intelligent systems that work around the clock to grow your revenue.',
+    features: ['Email Automation', 'AI Agent Builds', 'Marketing Automation', 'Social Media AI'],
+  },
 ]
 
 export default function Services() {
