@@ -50,6 +50,18 @@ const services = [
     description: 'Supercharge your business with cutting-edge AI. We build intelligent systems that work around the clock to grow your revenue.',
     features: ['Email Automation', 'AI Agent Builds', 'Marketing Automation', 'Social Media AI'],
   },
+  {
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7c-2 0-3 1-3 3z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6M12 9v6" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 12H2M22 12h-2M12 4V2M12 22v-2" />
+      </svg>
+    ),
+    title: 'Systems Integration',
+    description: 'We work with whatever systems you have, recommend what you need, or build custom integrated solutions that streamline your business operations.',
+    features: ['CRM Integration', 'API Connections', 'Workflow Automation', 'Custom Solutions'],
+  },
 ]
 
 export default function Services() {
