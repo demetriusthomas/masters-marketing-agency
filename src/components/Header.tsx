@@ -74,12 +74,12 @@ export default function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <a
-              href="#contact"
+            <Link
+              href="/booking"
               className="inline-flex items-center justify-center px-6 py-3 bg-[#FF9700] text-white font-semibold rounded-full hover:bg-[#E68600] transition-all hover:scale-105"
             >
-              Free Consultation
-            </a>
+              Book Consultation
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -134,13 +134,13 @@ export default function Header() {
                 </Link>
               )
             )}
-            <a
-              href="#contact"
+            <Link
+              href="/booking"
               className="block w-full text-center py-3 bg-[#FF9700] text-white font-semibold rounded-full hover:bg-[#E68600] transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Free Consultation
-            </a>
+              Book Consultation
+            </Link>
           </nav>
         </div>
       )}

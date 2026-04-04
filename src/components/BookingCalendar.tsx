@@ -184,22 +184,32 @@ export default function BookingCalendar({
   today.setHours(0, 0, 0, 0);
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+    <div className="max-w-2xl mx-auto bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 overflow-hidden">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
-        <h2 className="text-xl font-bold text-white">
-          {step === 1 && "Select Date & Time"}
-          {step === 2 && "Your Information"}
-          {step === 3 && "Booking Confirmed!"}
-        </h2>
-        {step < 3 && (
-          <p className="text-blue-100 text-sm mt-1">Step {step} of 2</p>
-        )}
+      <div className="bg-gradient-to-r from-[#FF9700] to-[#E68600] px-6 py-5">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-bold text-white">
+              {step === 1 && "Select Date & Time"}
+              {step === 2 && "Your Information"}
+              {step === 3 && "Booking Confirmed!"}
+            </h2>
+            {step < 3 && (
+              <p className="text-white/80 text-sm mt-1">Step {step} of 2</p>
+            )}
+          </div>
+          {/* Step Indicator */}
+          <div className="flex gap-2">
+            <div className={`w-3 h-3 rounded-full ${step >= 1 ? 'bg-white' : 'bg-white/30'}`} />
+            <div className={`w-3 h-3 rounded-full ${step >= 2 ? 'bg-white' : 'bg-white/30'}`} />
+            <div className={`w-3 h-3 rounded-full ${step >= 3 ? 'bg-white' : 'bg-white/30'}`} />
+          </div>
+        </div>
       </div>
 
       <div className="p-6">
         {error && (
-          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+          <div className="mb-4 p-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-200 text-sm">
             {error}
           </div>
         )}
@@ -210,16 +220,17 @@ export default function BookingCalendar({
             {/* Service Selection */}
             {services.length > 1 && (
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Select Service
                 </label>
                 <select
                   value={selectedService}
                   onChange={(e) => setSelectedService(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:ring-2 focus:ring-[#FF9700] focus:border-transparent appearance-none cursor-pointer"
+                  style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.5rem' }}
                 >
                   {services.map((s) => (
-                    <option key={s.name} value={s.name}>
+                    <option key={s.name} value={s.name} className="bg-gray-900 text-white">
                       {s.name} ({s.duration} min)
                     </option>
                   ))}
@@ -239,13 +250,13 @@ export default function BookingCalendar({
                   currentMonth.getMonth() === today.getMonth() &&
                   currentMonth.getFullYear() === today.getFullYear()
                 }
-                className="p-2 hover:bg-gray-100 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-2 hover:bg-white/10 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors text-white"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
-              <h3 className="text-lg font-semibold text-gray-900">
+              <h3 className="text-lg font-semibold text-white">
                 {currentMonth.toLocaleDateString("en-US", {
                   month: "long",
                   year: "numeric",
@@ -257,7 +268,7 @@ export default function BookingCalendar({
                     new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1)
                   )
                 }
-                className="p-2 hover:bg-gray-100 rounded-lg"
+                className="p-2 hover:bg-white/10 rounded-lg transition-colors text-white"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -269,7 +280,7 @@ export default function BookingCalendar({
             <div className="mb-6">
               <div className="grid grid-cols-7 gap-1 mb-2">
                 {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-                  <div key={day} className="text-center text-xs font-medium text-gray-500 py-2">
+                  <div key={day} className="text-center text-xs font-medium text-gray-400 py-2">
                     {day}
                   </div>
                 ))}
@@ -277,7 +288,7 @@ export default function BookingCalendar({
 
               {slotsLoading ? (
                 <div className="flex items-center justify-center h-48">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF9700]" />
                 </div>
               ) : (
                 <div className="grid grid-cols-7 gap-1">
@@ -301,10 +312,10 @@ export default function BookingCalendar({
                         disabled={isPast || !hasAvailability}
                         className={`
                           h-10 rounded-lg text-sm font-medium transition-all
-                          ${isPast ? "text-gray-300 cursor-not-allowed" : ""}
-                          ${!isPast && !hasAvailability ? "text-gray-400 cursor-not-allowed" : ""}
-                          ${!isPast && hasAvailability && !isSelected ? "text-gray-900 hover:bg-blue-50 hover:text-blue-600" : ""}
-                          ${isSelected ? "bg-blue-600 text-white" : ""}
+                          ${isPast ? "text-gray-600 cursor-not-allowed" : ""}
+                          ${!isPast && !hasAvailability ? "text-gray-500 cursor-not-allowed" : ""}
+                          ${!isPast && hasAvailability && !isSelected ? "text-white hover:bg-[#FF9700]/20 hover:text-[#FF9700]" : ""}
+                          ${isSelected ? "bg-[#FF9700] text-white" : ""}
                         `}
                       >
                         {date.getDate()}
@@ -318,13 +329,15 @@ export default function BookingCalendar({
             {/* Time Slots */}
             {selectedDate && slots[selectedDate]?.slots && (
               <div>
-                <h4 className="text-sm font-medium text-gray-700 mb-3">
+                <h4 className="text-sm font-medium text-gray-300 mb-3">
                   Available times for{" "}
-                  {new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", {
-                    weekday: "long",
-                    month: "long",
-                    day: "numeric",
-                  })}
+                  <span className="text-white">
+                    {new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", {
+                      weekday: "long",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </span>
                 </h4>
                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                   {slots[selectedDate].slots.map((slot) => {
@@ -338,8 +351,8 @@ export default function BookingCalendar({
                           px-3 py-2 rounded-lg text-sm font-medium transition-all
                           ${
                             isSelected
-                              ? "bg-blue-600 text-white"
-                              : "bg-gray-100 text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                              ? "bg-[#FF9700] text-white"
+                              : "bg-white/10 text-white hover:bg-[#FF9700]/20 hover:text-[#FF9700]"
                           }
                         `}
                       >
@@ -355,7 +368,7 @@ export default function BookingCalendar({
             <button
               onClick={() => setStep(2)}
               disabled={!selectedSlot}
-              className="w-full mt-6 py-3 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full mt-6 py-3 px-4 bg-[#FF9700] text-white font-semibold rounded-full hover:bg-[#E68600] transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               Continue
             </button>
@@ -366,9 +379,9 @@ export default function BookingCalendar({
         {step === 2 && (
           <form onSubmit={handleBook}>
             {/* Selected Time Summary */}
-            <div className="mb-6 p-4 bg-blue-50 rounded-lg">
-              <p className="text-sm text-blue-700">
-                <span className="font-semibold">{selectedService}</span>
+            <div className="mb-6 p-4 bg-[#FF9700]/20 border border-[#FF9700]/30 rounded-xl">
+              <p className="text-sm text-white">
+                <span className="font-semibold text-[#FF9700]">{selectedService}</span>
                 <br />
                 {selectedDate &&
                   new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", {
@@ -381,7 +394,7 @@ export default function BookingCalendar({
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="text-sm text-blue-600 hover:underline mt-1"
+                className="text-sm text-[#FF9700] hover:underline mt-1"
               >
                 Change
               </button>
@@ -390,7 +403,7 @@ export default function BookingCalendar({
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-300 mb-1">
                     First Name *
                   </label>
                   <input
@@ -400,11 +413,11 @@ export default function BookingCalendar({
                     onChange={(e) =>
                       setFormData({ ...formData, firstName: e.target.value })
                     }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-[#FF9700] focus:border-transparent"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-gray-300 mb-1">
                     Last Name *
                   </label>
                   <input
@@ -414,13 +427,13 @@ export default function BookingCalendar({
                     onChange={(e) =>
                       setFormData({ ...formData, lastName: e.target.value })
                     }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-[#FF9700] focus:border-transparent"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-300 mb-1">
                   Email *
                 </label>
                 <input
@@ -430,12 +443,12 @@ export default function BookingCalendar({
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-[#FF9700] focus:border-transparent"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-300 mb-1">
                   Phone *
                 </label>
                 <input
@@ -446,12 +459,12 @@ export default function BookingCalendar({
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-[#FF9700] focus:border-transparent"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-300 mb-1">
                   Notes (optional)
                 </label>
                 <textarea
@@ -460,7 +473,7 @@ export default function BookingCalendar({
                     setFormData({ ...formData, notes: e.target.value })
                   }
                   rows={3}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-500 focus:ring-2 focus:ring-[#FF9700] focus:border-transparent resize-none"
                   placeholder="Anything you'd like us to know..."
                 />
               </div>
@@ -475,9 +488,9 @@ export default function BookingCalendar({
                   onChange={(e) =>
                     setFormData({ ...formData, tcpaConsent: e.target.checked })
                   }
-                  className="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  className="mt-1 h-4 w-4 text-[#FF9700] bg-white/10 border-white/20 rounded focus:ring-[#FF9700]"
                 />
-                <label htmlFor="tcpa" className="text-xs text-gray-600">
+                <label htmlFor="tcpa" className="text-xs text-gray-400">
                   I agree to receive SMS and email communications regarding my appointment.
                   Message and data rates may apply. Reply STOP to unsubscribe.
                 </label>
@@ -488,14 +501,14 @@ export default function BookingCalendar({
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="flex-1 py-3 px-4 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex-1 py-3 px-4 border border-white/20 text-white font-semibold rounded-full hover:bg-white/10 transition-colors"
               >
                 Back
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 py-3 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                className="flex-1 py-3 px-4 bg-[#FF9700] text-white font-semibold rounded-full hover:bg-[#E68600] transition-all hover:scale-[1.02] disabled:opacity-50 disabled:hover:scale-100"
               >
                 {loading ? "Booking..." : "Book Now"}
               </button>
@@ -506,18 +519,18 @@ export default function BookingCalendar({
         {/* Step 3: Confirmation */}
         {step === 3 && (
           <div className="text-center py-8">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">You&apos;re All Set!</h3>
-            <p className="text-gray-600 mb-6">
+            <h3 className="text-xl font-bold text-white mb-2">You&apos;re All Set!</h3>
+            <p className="text-gray-400 mb-6">
               Your appointment has been confirmed. You&apos;ll receive a confirmation email and text shortly.
             </p>
-            <div className="p-4 bg-gray-50 rounded-lg text-left">
-              <p className="text-sm text-gray-700">
-                <span className="font-semibold">{selectedService}</span>
+            <div className="p-4 bg-white/10 border border-white/20 rounded-xl text-left">
+              <p className="text-sm text-white">
+                <span className="font-semibold text-[#FF9700]">{selectedService}</span>
                 <br />
                 {selectedDate &&
                   new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", {
@@ -544,7 +557,7 @@ export default function BookingCalendar({
                   tcpaConsent: false,
                 });
               }}
-              className="mt-6 text-blue-600 hover:underline"
+              className="mt-6 text-[#FF9700] hover:underline font-medium"
             >
               Book Another Appointment
             </button>
