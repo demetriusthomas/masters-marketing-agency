@@ -6,7 +6,9 @@ const footerLinks = {
     { label: 'Search Engine Optimization', href: '#services' },
     { label: 'Reputation Management', href: '#services' },
     { label: 'Chat & Lead Capture', href: '#services' },
-    { label: 'SMS Marketing', href: '#services' },
+    { label: 'SMS & MMS Marketing', href: '#services' },
+    { label: 'AI Automation', href: '#services' },
+    { label: 'Systems Integration', href: '#services' },
   ],
   company: [
     { label: 'About Us', href: '#' },
