@@ -46,7 +46,7 @@ const services = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v1m0 2v1m-2-2h4" />
       </svg>
     ),
-    title: 'AI Automation',
+    title: 'AI Automation & Building',
     description: 'Supercharge your business with cutting-edge AI. We build intelligent systems that work around the clock to grow your revenue.',
     features: ['Email Automation', 'AI Agent Builds', 'Marketing Automation', 'Social Media AI'],
   },

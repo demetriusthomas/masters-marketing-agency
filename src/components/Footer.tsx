@@ -7,7 +7,7 @@ const footerLinks = {
     { label: 'Reputation Management', href: '#services' },
     { label: 'Chat & Lead Capture', href: '#services' },
     { label: 'SMS & MMS Marketing', href: '#services' },
-    { label: 'AI Automation', href: '#services' },
+    { label: 'AI Automation & Building', href: '#services' },
     { label: 'Systems Integration', href: '#services' },
   ],
   company: [
